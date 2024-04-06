@@ -1,7 +1,7 @@
 import { Button, Card, Col, Collapse, CollapseProps, Row } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
-import { getRealtimeUserInfo, getSystemSetting } from "../apis";
+import { getPaymentSettings, getRealtimeUserInfo, getSystemSetting } from "../apis";
 
 const { Meta } = Card;
 
@@ -11,6 +11,7 @@ export default function PaymentPage() {
     const [maxFreeTriedCnt, setMaxFreeTriedCnt] = useState(5);
     const [availablePredictCnt, setAvailablePredictCnt] = useState(100);
     const [isPaid, setIsPaid] = useState(false);
+    const [monthlyCost, setMonthlyCost] = useState(100);
 
     useEffect(() => {
         getSystemSetting().then(setting => {
@@ -22,6 +23,11 @@ export default function PaymentPage() {
         getRealtimeUserInfo().then(info => {
             if (info) {
                 setIsPaid(info.isPaid);
+            }
+        })
+        getPaymentSettings().then(settings => {
+            if (settings) {
+                setMonthlyCost(settings.periodAmt);
             }
         })
     }, [])
@@ -94,7 +100,7 @@ export default function PaymentPage() {
         {
             key: '3',
             label: 'Q: 付款方式有哪些？金流是安全的嗎？',
-            children: <p>付款採<b>訂閱制</b>，綁定信用卡後將每月扣款，採用第三方 <a href="https://www.newebpay.com/">藍新金流</a> 作為收款管道，是安全無虞的金流方式！</p>,
+            children: <p>付款採<b>訂閱制</b>，綁定信用卡後將每月扣款 {monthlyCost}，採用第三方 <a href="https://www.newebpay.com/">藍新金流</a> 作為收款管道，是安全無虞的金流方式！</p>,
         },
     ];
 
@@ -117,7 +123,10 @@ export default function PaymentPage() {
                         <Button type={isPaid ? "dashed" : "primary"} disabled={isPaid} onClick={upgrade}>{isPaid ? "已升級" : "升級"}</Button>
                     ]}
                 >
-                    <Meta title="付費版" description={`單日上限 ${availablePredictCnt} 次`} />
+                    <Meta title="付費版" description={<div>
+                        <p>單日上限 {availablePredictCnt} 次</p>
+                        <p>$TWD{monthlyCost}元/月</p>
+                    </div>} />
                 </Card>
             </Col>
         </Row>

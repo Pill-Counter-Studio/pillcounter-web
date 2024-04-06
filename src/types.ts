@@ -44,6 +44,16 @@ export interface RealtimeUserInfo {
     isPaid: boolean
     freeTriedCount: number
     canPredict: boolean
+    availablePredictCount: number
+}
+
+export interface PaymentSettings {
+    productDesc: string
+    periodType: "M" | 'Y' | "D" | "W"
+    periodAmt: number
+    periodPoint: string
+    periodStartType: 1 | 2 | 3
+    periodTimes: number
 }
 
 export interface Box {

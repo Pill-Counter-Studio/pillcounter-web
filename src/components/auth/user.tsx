@@ -10,6 +10,7 @@ export default function UserPage() {
     const { username, avatarUri, email, logout } = useContext(LoginUserContext);
     const [isPaid, setIsPaid] = useState(false);
     const [freeTriedCnt, setFreeTriedCnt] = useState(0);
+    const [availablePredictCount, setAvailablePredictCount] = useState(0);
 
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -18,6 +19,7 @@ export default function UserPage() {
             if (info) {
                 setIsPaid(info.isPaid);
                 setFreeTriedCnt(info.freeTriedCount);
+                setAvailablePredictCount(info.availablePredictCount)
             }
         })
     }, [])
@@ -71,7 +73,13 @@ export default function UserPage() {
             children: (isPaid ? "是" : "否") ?? "-"
         }
     ];
-    if (!isPaid) {
+    if (isPaid) {
+        items.push({
+            key: '4',
+            label: '付費額度',
+            children: availablePredictCount > 0 ? `剩餘 ${availablePredictCount} 次` : `已用完`
+        })
+    } else {
         items.push({
             key: '4',
             label: '免費額度',
@@ -94,10 +102,11 @@ export default function UserPage() {
                     退訂
                 </Button>
                 :
-                <Link to="/payment" style={{ marginRight: 12 }}>
-                    <Button size="small" type="primary">方案說明</Button>
-                </Link>
+                null
         }
+        <Link to="/payment" style={{ marginRight: 12 }}>
+            <Button size="small" type="primary">方案說明</Button>
+        </Link>
         <Button size="small" type="default" danger onClick={() => logout()} style={{ marginTop: 20 }}>登出</Button>
     </div >
 }

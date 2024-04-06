@@ -1,4 +1,4 @@
-import { PredictApiResponse, PredictRecord, RealtimeUserInfo, SystemSetting } from "./types";
+import { PaymentSettings, PredictApiResponse, PredictRecord, RealtimeUserInfo, SystemSetting } from "./types";
 
 export default async function predictImage(formData: FormData): Promise<PredictApiResponse | null> {
     return await fetch(`${process.env.REACT_APP_MODEL_SERVER_URL}/predict`, {
@@ -93,6 +93,27 @@ export async function deleteRecord(record_id: string): Promise<number | null> {
         })
 }
 
+export async function getPaymentSettings(): Promise<PaymentSettings | null> {
+    return await fetch(`${process.env.REACT_APP_PAYMENT_SERVER_URL}/settings`, {
+        method: "GET",
+        credentials: "include"
+    })
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            throw new Error(`Cannot retrieve the payment settings, status code: ${res.status}, message: ${res.statusText}`);
+        })
+        .then(data => {
+            // console.log(data)
+            return data;
+        })
+        .catch(err => {
+            console.error(err);
+            return null;
+        })
+}
+
 export async function getRealtimeUserInfo(): Promise<RealtimeUserInfo | null> {
     return await fetch(`${process.env.REACT_APP_MODEL_SERVER_URL}/user`, {
         method: "GET",
@@ -117,7 +138,8 @@ export async function getRealtimeUserInfo(): Promise<RealtimeUserInfo | null> {
             return {
                 isPaid: data.is_paid,
                 freeTriedCount: data.free_tried_count,
-                canPredict
+                canPredict,
+                availablePredictCount: data.available_predict_count
             }
         })
         .catch(err => {
