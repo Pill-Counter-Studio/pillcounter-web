@@ -100,7 +100,7 @@ export default function PaymentPage() {
         {
             key: '3',
             label: 'Q: 付款方式有哪些？金流是安全的嗎？',
-            children: <p>付款採<b>訂閱制</b>，綁定信用卡後將每月扣款 {monthlyCost}，採用第三方 <a href="https://www.newebpay.com/">藍新金流</a> 作為收款管道，是安全無虞的金流方式！</p>,
+            children: <p>付款採<b>訂閱制</b>，綁定信用卡後將每月扣款 {monthlyCost} 元台幣，採用第三方 <a href="https://www.newebpay.com/">藍新金流</a> 作為收款管道，是安全無虞的金流方式！</p>,
         },
     ];
 
