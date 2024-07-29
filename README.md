@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+## Pill Counter App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> You can find further detail from this website: [Pill Counter App Explain](https://wood-pecorino-16c.notion.site/Pill-Counter-App-7b054118ce5e4e0180bc39a10a7f57dc)
 
-## Available Scripts
+### Introduction
 
-In the project directory, you can run:
+My friend, who is a pharmacist, often needs to count various pills one by one to complete the medication packaging process. To alleviate this tedious task, I developed a simple app that uses an artificial intelligence (AI) model to automatically identify and count the number of pills in a photo, providing an immediate and accurate result.
 
-### `npm start`
+### Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![demo](./_doc/demo.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Project Objectives
 
-### `npm test`
+- Develop a user-friendly and easy-to-operate web page
+- Enable quick interpretation of pill counts from uploaded photos
+- Maintain records of each interpretation for manual review
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Features
 
-### `npm run build`
+- Use PWA to allow users to install the website on their mobile devices to simulate the experience of a native app.
+- Use Google third-party authentication to eliminate the need for users to register separately.
+- Support uploading images or taking photos instantly, and the system will quickly interpret the number of pills
+- Visually present the AI model's prediction results on the images by marking each pill with a red dot
+- Retain prediction records for 7 days for manual review and support adding notes to prediction records
+- Integrate Neweb Pay for subscription management after exceeding the trial limit
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Pending Tasks
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Attempted to run containerized services on AWS EC2, but encountered issues with large Docker image transfers.
+  - Future steps could include optimizing the server's package dependencies.
+  - The production environment should only require inference functionality, so trimming down the YOLO v8-related training libraries can help reduce the image size.
+- Attempted to deploy the React Web App on [Netlify](https://www.netlify.com/), but deployment has been temporarily halted due to issues with setting up the AWS server.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Conclusion
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project aims to address the tedious task of manual pill counting faced by pharmacists during the medication packaging process. By developing a user-friendly web application, pharmacists can easily upload images or take photos instantly, and the system will quickly and accurately interpret the number of pills, marking each pill with a red dot. Additionally, prediction results will be retained for 7 days to facilitate manual review and note-taking. The integration of BluePay ensures that users can seamlessly subscribe and make payments after exceeding the trial limit. This application not only improves work efficiency but also reduces manual counting errors, providing significant convenience for pharmacists in their daily work.
